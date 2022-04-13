@@ -27,7 +27,7 @@ namespace WallPaperThree
 
         static void Main()
         {
-            string currentDir = System.IO.Directory.GetCurrentDirectory();//µ±Ç°¹¤×÷Ä¿Â¼
+            string currentDir = System.IO.Directory.GetCurrentDirectory();//å½“å‰å·¥ä½œç›®å½•
 
             PrintVisibleWindowHandles(2);
             // The output will look something like this. 
@@ -43,7 +43,6 @@ namespace WallPaperThree
             // Fetch the Progman window
             IntPtr progman = W32.FindWindow("Progman", null);
 
-            IntPtr result = IntPtr.Zero;
 
             // Send 0x052C to Progman. This message directs Progman to spawn a 
             // WorkerW behind the desktop icons. If it is already there, nothing 
@@ -135,7 +134,7 @@ namespace WallPaperThree
 
             form.Load += new EventHandler((s, e) =>
             {
-                /// ´°¿ÚÉèÖÃ
+                /// çª—å£è®¾ç½®
                 //Screen.PrimaryScreen.Bounds.Width
                 int SH = Screen.PrimaryScreen.Bounds.Height;
                 int SW = Screen.PrimaryScreen.Bounds.Width;
@@ -144,17 +143,16 @@ namespace WallPaperThree
                 form.Left = 0;
                 form.Top = 0;
                 form.resetBrowerPanelSize();
+                
+                //æµè§ˆå™¨æ¸²æŸ“
                 //form.setBrowerURL("https://www.baidu.com");
+                //form.setBrowerURL("file:///F:\\MyWallPaper\\resource\\index.html");
                 string URL = "file:///" + currentDir + "\\resource\\index.html";
-                //form.setBrowerURL("file:///F:\\MyWallPaper\\WallPaperThree\\WallPaperThree\\bin\\x64/Debug\\net5.0-windows\\myPage.html");
                 form.setBrowerURL(URL);
-                //form.setBrowerURL("<!DOCTYPE html>< html >< head >< meta charset = \"utf-8\" >< title > ²ËÄñ½Ì³Ì(runoob.com) </ title ></ head >< body >< h1 > ÎÒµÄµÚÒ»¸ö±êÌâ </ h1 >< p > ÎÒµÄµÚÒ»¸ö¶ÎÂä¡£</ p ></ body ></ html > ");
-
-                //form.setBrowerURL("< h1 > ÎÒµÄµÚÒ»¸ö±êÌâ </ h1 >< p > ÎÒµÄµÚÒ»¸ö¶ÎÂä¡£</ p >");
 
                 //W32.SetParent(form.Handle, progman);
                 W32.SetParent(form.Handle, workerws);
-Console.WriteLine("----------------------------------------------------------");
+
 
                 //Create a new instance in code or add via the designer
                 //var browser = new ChromiumWebBrowser();
@@ -195,9 +193,8 @@ Console.WriteLine("----------------------------------------------------------");
             });
 
             // Start the Application Loop for the Form.
-Console.WriteLine("----+++++++++++++++++++++++---------");
             Application.Run(form);
-Console.WriteLine("+++++-------------------------------=----+++++");
+
         }
 
         static void PrintVisibleWindowHandles(IntPtr hwnd, int maxLevel = -1, int level = 0)
