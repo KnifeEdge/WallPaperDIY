@@ -1,6 +1,16 @@
 # 简介
 
+基于网页的windows自定义壁纸实现方案，在c#的基础上使用了winform + CefSharp + mono等技术，以windows API调用为基本原理，实现了自定制网页桌面背景、脱离.NET框架、 
 
+
+# 项目文件列表
+Mono: mono安装文件夹，也是最终打包的文件夹，包含mono的bin和lib，源码和资源文件夹MyProgram.
+
+bin:mono/bin:Mono的bin文件夹.
+
+lib:mono/lib：Mono的lib文件夹.
+
+Myprogram：源码文件，资源文件，第三方库文件，可执行文件.
 
 
 # 实现原理
@@ -39,7 +49,9 @@ resource文件夹里面的网页文件是从网上随便找的，可以自行更
 # 编译
 
 为了实现脱离.NET的应用开发，首先要现在安装mono软件，官网上有教程。默认安装位置为 C:\Program Files\Mono ，里面主要是 bin 和 lib 这两个文件夹。
-在mono文件夹下新建一个文件夹MyProgram,将本项目的cs文件和resources文件夹复制到MyProgram中。将Cefsharp和其他必要的依赖库放在MyProgram文件夹中，我的文件列表如下图所示：
+将本项目的MyProgram文件夹复制到Mono中。同时将Cefsharp和其他必要的依赖库放在MyProgram文件夹中.MyProgram文件夹内容如下：
+![image](https://user-images.githubusercontent.com/49440149/163184761-bab8232d-1fe7-4cfb-a38d-b76b4a532e1b.png)
+
 
 在Mono文件中打开cmd窗口，运行命令：
 
@@ -78,7 +90,7 @@ nuget需要安装的包有`cef.redist.x64`,`CefSharp.Common`,`CefSharp.Winform`
 1. `resetBrowerPanelSize()`绑定浏览器内核同时设置浏览器面板相对于窗口的大小，位置
 2. 设置窗口属性 FormBorderStyle 为 none，去除顶部菜单栏和边框。
 
-`Program.cs`文件是主要的处理流程：
+`Program.cs`文件的main函数是主要的处理流程：
 ```
 IntPtr progman = W32.FindWindow("Progman", null);//拿到progman窗体图层的指针；
 
