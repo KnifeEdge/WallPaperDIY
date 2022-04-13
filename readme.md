@@ -50,6 +50,7 @@ resource文件夹里面的网页文件是从网上随便找的，可以自行更
 
 为了实现脱离.NET的应用开发，首先要现在安装mono软件，官网上有教程。默认安装位置为 C:\Program Files\Mono ，里面主要是 bin 和 lib 这两个文件夹。
 将本项目的MyProgram文件夹复制到Mono中。同时将Cefsharp和其他必要的依赖库放在MyProgram文件夹中.MyProgram文件夹内容如下：
+
 ![image](https://user-images.githubusercontent.com/49440149/163184761-bab8232d-1fe7-4cfb-a38d-b76b4a532e1b.png)
 
 
