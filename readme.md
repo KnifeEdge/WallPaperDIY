@@ -46,6 +46,88 @@ CefSharp 是一个c#运行chrome内核的第三方库，可以在官网上自行
 
 # 代码详解
 
+`Win32Wrapper.cs`该文件是windows API的封装文件，具体来源忘了，想起来再补上。
+
+`Form1.Designer.cs`里面是窗口类Form1的实现。
+
+在这里，首先创建浏览器内核变量`private ChromiumWebBrowser browser = new ChromiumWebBrowser();`
+
+然后，`setBrowerURL(string url)`函数根据url地址把网页渲染到winform窗体中。
+
+在窗口生成时，还应该做一些预处理，包括
+1. `resetBrowerPanelSize()`绑定浏览器内核同时设置浏览器面板相对于窗口的大小，位置
+2. 设置窗口属性 FormBorderStyle 为 none，去除顶部菜单栏和边框。
+
+`Program.cs`文件是主要的处理流程：
+```
+IntPtr progman = W32.FindWindow("Progman", null);//拿到progman窗体图层的指针；
+
+//这个函数可以认为是对workerW两个图层的初始化处理
+W32.SendMessageTimeout(progman,
+                       0x052C,
+                       new IntPtr(0),
+                       IntPtr.Zero,
+                       W32.SendMessageTimeoutFlags.SMTO_NORMAL,
+                       1000,
+                       out result);
+                       
+//找到两个WorkerW图层的指针
+IntPtr workerw = IntPtr.Zero;//桌面图标图层
+IntPtr workerws = IntPtr.Zero;
+W32.EnumWindows(new W32.EnumWindowsProc((tophandle, topparamhandle) =>
+{
+    IntPtr p = W32.FindWindowEx(tophandle,
+                                IntPtr.Zero,
+                                "SHELLDLL_DefView",
+                                IntPtr.Zero);
+
+    if (p != IntPtr.Zero)
+    {
+        workerw = p;
+        workerws = W32.FindWindowEx(IntPtr.Zero,
+                                   tophandle,
+                                   "WorkerW",
+                                   IntPtr.Zero);
+    }
+
+    return true;
+}), IntPtr.Zero);
+
+//创建窗口实例
+Form1 form = new Form1();
+form.Load += new EventHandler((s, e) =>
+            {
+                /// 窗口大小设置为屏幕的分辨率
+                //Screen.PrimaryScreen.Bounds.Width
+                int SH = Screen.PrimaryScreen.Bounds.Height;
+                int SW = Screen.PrimaryScreen.Bounds.Width;
+                form.Width = SW;
+                form.Height = SH;
+                form.Left = 0;
+                form.Top = 0;
+                form.resetBrowerPanelSize();
+
+                // currentDir是计算得到的exe文件所在的目录，
+                // URL 是本地html文件的路径 格式为"file:///F:\\MyWallPaper\\test\\myPage.html"
+                // URL 也可以是一个网页地址
+                string URL = "file:///" + currentDir + "\\resource\\index.html";
+                form.setBrowerURL(URL);
+                
+                
+                // 这个函数设置窗口的父子关系，可以通过spy++软件查看
+                //W32.SetParent(form.Handle, progman);
+                W32.SetParent(form.Handle, workerws);
+                
+            });
+
+            // Start the Application Loop for the Form.
+            Application.Run(form);
+        }
+
+
+
+
+```
 
 
 
