@@ -1,9 +1,9 @@
-#简介
+# 简介
 
 
 
 
-#实现原理
+# 实现原理
 
 原文链接：https://www.codeproject.com/Articles/856020/Draw-Behind-Desktop-Icons-in-Windows-plus 
 
@@ -25,24 +25,26 @@ mono官网：https://www.mono-project.com/
 CefSharp 是一个c#运行chrome内核的第三方库，可以在官网上自行下载使用，
 
 
-#编译
+# 编译
 
 为了实现脱离.NET的应用开发，首先要现在安装mono软件，官网上有教程。默认安装位置为 C:\Program Files\Mono ，里面主要是 bin 和 lib 这两个文件夹。
 在mono文件夹下新建一个文件夹MyProgram,将本项目的cs文件和resources文件夹复制到MyProgram中。将Cefsharp和其他必要的依赖库放在MyProgram文件夹中，我的文件列表如下图所示：
 
 在Mono文件中打开cmd窗口，运行命令：
 
-`bin\csc -target:winexe /r:System.Data.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll /r:MyProgram\CefSharp.BrowserSubprocess.Core.dll /r:MyProgram\CefSharp.Core.dll /r:MyProgram\CefSharp.dll /r:MyProgram\CefSharp.WinForms.dll test\*.cs`
+`bin\csc -target:winexe /r:System.Data.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll /r:MyProgram\CefSharp.BrowserSubprocess.Core.dll /r:MyProgram\CefSharp.Core.dll /r:MyProgram\CefSharp.dll /r:MyProgram\CefSharp.WinForms.dll MyProgram\*.cs`
 
 这里可能会报错说找不到某个模块，比如在System里找不到Data模块，那就在命令里添加`/r:System.Data.dll`如上所示。
 
 如果显示如下就是编译成功了，编译成功的exe文件将出现在Mono文件夹中。
 
-`Microsoft (R) Visual C# Compiler version 3.6.0-4.20224.5 (ec77c100)
-Copyright (C) Microsoft Corporation. All rights reserved.`
+`Microsoft (R) Visual C# Compiler version 3.6.0-4.20224.5 (ec77c100)`
 
+`Copyright (C) Microsoft Corporation. All rights reserved.`
 
-#使用方式
+将exe文件复制到MyProgram中，运行即可（这里编译成功的exe文件可以在编译命令里指定）。
+
+# 代码详解
 
 
 
