@@ -22,7 +22,9 @@ winform是用c#写的，而开发运行winform应用需要.NET环境支持，你
 
 mono官网：https://www.mono-project.com/
 
-CefSharp 是一个c#运行chrome内核的第三方库，可以在官网上自行下载使用，
+CefSharp 是一个c#运行chrome内核的第三方库，可以在官网上自行下载使用。
+
+resource文件夹里面的网页文件是从网上随便找的，可以自行更换。
 
 
 # 编译
@@ -43,6 +45,13 @@ CefSharp 是一个c#运行chrome内核的第三方库，可以在官网上自行
 `Copyright (C) Microsoft Corporation. All rights reserved.`
 
 将exe文件复制到MyProgram中，运行即可（这里编译成功的exe文件可以在编译命令里指定）。
+
+# TIPs
+没咋学过c#，所以刚开始开发的时候我是用的visual studio 2019写的代码，用vs自带的Nuget导入第三方库比较方便，但是程序运行的时候还是出现问题，dll文件还是有缺失。nuget默认下载位置在c盘，具体位置忘了，可以上网查一查，CefSharp里有几个包没有导入到项目里面，运行的时候会出问题，要从默认下载位置找出来，放到程序运行文件夹中，好像是CefSharp.dll 和 CefSharp.Core.dll.
+
+nuget需要安装的包有`cef.redist.x64`,`CefSharp.Common`,`CefSharp.Winform`
+
+
 
 # 代码详解
 
