@@ -25,6 +25,7 @@ namespace WallPaperThree
 
         public void resetBrowerPanelSize() {
             
+            //浏览器内核装载在一个panel上，设置该panel的大小和位置
             this.panel1.Width = this.Size.Width;
             this.panel1.Height = this.Size.Height;
             this.panel1.Left = 0;
@@ -35,9 +36,6 @@ namespace WallPaperThree
             browser.SetBounds(0,0, this.Size.Width, this.Size.Height);
         }
         public void setBrowerURL(string url) {
-            //Create a new instance in code or add via the designer
-            //var browser = new ChromiumWebBrowser();
-            //this.panel1.Controls.Add(browser);
 
             //Load a different url
             browser.LoadUrl(url);
