@@ -69,13 +69,13 @@ resource文件夹里面的网页文件是从网上随便找的，可以自行更
 将exe文件复制到MyProgram中，运行即可（这里编译成功的exe文件可以在编译命令里指定）。
 
 # TIPs
-没咋学过c#，所以代码是用的visual studio 2019写的，用vs自带的Nuget导入第三方库比较方便，但是程序运行的时候还是出现问题，dll文件还是有缺失。nuget默认下载位置在c盘，具体位置忘了，可以上网查一查，CefSharp里有几个包没有导入到项目里面，运行的时候会出问题，要从默认下载位置找出来，放到程序运行文件夹中，好像是CefSharp.dll 和 CefSharp.Core.dll.
+没咋学过c#，代码是用的visual studio 2019写的，用vs自带的Nuget导入第三方库比较方便，但是程序运行的时候还是出现问题，dll文件还是有缺失。nuget默认下载位置在c盘，具体位置忘了，可以上网查一查，CefSharp里有几个包没有导入到项目里面，运行的时候会出问题，要从默认下载位置找出来，放到程序运行文件夹中，好像是CefSharp.dll 和 CefSharp.Core.dll.
 
 CefSharp运行需要的文件列表在这里：https://github.com/cefsharp/CefSharp/wiki/Output-files-description-table-%28Redistribution%29 
 
 nuget需要安装的包有`cef.redist.x64`,`CefSharp.Common`,`CefSharp.Winform`
 
-
+如果不需要脱离.NET框架的话，直接使用VS编译运行就行，当你要跨平台或不想客户端安装.NET框架时才需要用到MONO.
 
 # 代码详解
 
